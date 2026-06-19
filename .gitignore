@@ -1,0 +1,15 @@
+# Build output
+build/
+cmake-build-*/
+
+# Compiled objects / binaries
+*.o
+*.a
+*.out
+telemetry
+telemetry_tests
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
