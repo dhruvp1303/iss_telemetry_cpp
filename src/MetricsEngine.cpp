@@ -7,12 +7,10 @@ namespace {
 double toRadians(double degrees) {
     return degrees * M_PI / 180.0;
 }
-}  // namespace
+}  
 
 double MetricsEngine::groundTrackDistance(const TelemetryReading& a,
                                           const TelemetryReading& b) const {
-    // Haversine formula: great-circle distance between two points on a sphere
-    // given their latitude/longitude. Standard approach for surface distance.
     const double lat1 = toRadians(a.latitude);
     const double lat2 = toRadians(b.latitude);
     const double dlat = toRadians(b.latitude - a.latitude);

@@ -6,28 +6,24 @@
 
 std::optional<double> TelemetryParser::extractNumber(const std::string& json,
                                                      const std::string& key) const {
-    // Find the quoted key, e.g. "latitude".
     const std::string quoted_key = "\"" + key + "\"";
     std::size_t pos = json.find(quoted_key);
     if (pos == std::string::npos) {
         return std::nullopt;
     }
 
-    // Advance past the key to the ':' separator.
     pos = json.find(':', pos + quoted_key.size());
     if (pos == std::string::npos) {
         return std::nullopt;
     }
-    ++pos;  // step past ':'
+    ++pos;  
 
-    // Skip whitespace and an optional opening quote (the API sometimes returns
-    // numbers as JSON strings).
+   
     while (pos < json.size() &&
            (std::isspace(static_cast<unsigned char>(json[pos])) || json[pos] == '"')) {
         ++pos;
     }
 
-    // Collect the numeric token: digits, sign, decimal point, exponent.
     const std::size_t start = pos;
     while (pos < json.size()) {
         const char c = json[pos];
@@ -40,7 +36,7 @@ std::optional<double> TelemetryParser::extractNumber(const std::string& json,
     }
 
     if (pos == start) {
-        return std::nullopt;  // no numeric characters found
+        return std::nullopt;  
     }
 
     const std::string token = json.substr(start, pos - start);
@@ -58,7 +54,6 @@ std::optional<double> TelemetryParser::extractNumber(const std::string& json,
 
 std::optional<TelemetryReading> TelemetryParser::parse(
     const std::string& json_line) const {
-    // Reject obviously non-object input early.
     if (json_line.find('{') == std::string::npos) {
         return std::nullopt;
     }
@@ -69,7 +64,6 @@ std::optional<TelemetryReading> TelemetryParser::parse(
     const auto altitude = extractNumber(json_line, "altitude");
     const auto velocity = extractNumber(json_line, "velocity");
 
-    // Every required field must be present and numeric.
     if (!timestamp || !latitude || !longitude || !altitude || !velocity) {
         return std::nullopt;
     }

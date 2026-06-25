@@ -11,9 +11,7 @@
 
 namespace {
 
-// Processes a stream of telemetry lines: parse -> compute metrics against the
-// previous reading -> detect anomalies -> report. One pass per line keeps the
-// per-message work bounded.
+
 void processStream(std::istream& in) {
     TelemetryParser parser;
     MetricsEngine metrics_engine;
@@ -40,7 +38,6 @@ void processStream(std::istream& in) {
         ++parsed;
 
         if (!previous) {
-            // First valid reading: nothing to diff against yet.
             std::cout << "[" << reading->timestamp << "] "
                       << "lat=" << std::fixed << std::setprecision(4)
                       << reading->latitude << " lon=" << reading->longitude
@@ -79,12 +76,10 @@ void processStream(std::istream& in) {
               << "anomalies found: " << anomalies_found << "\n";
 }
 
-}  // namespace
+} 
 
 int main(int argc, char** argv) {
-    // Read from a replay file if given, otherwise from stdin. Reading stdin
-    // lets the program sit at the end of a live feed, e.g. a poller piping the
-    // ISS API in line by line.
+    
     if (argc > 1) {
         std::ifstream file(argv[1]);
         if (!file) {

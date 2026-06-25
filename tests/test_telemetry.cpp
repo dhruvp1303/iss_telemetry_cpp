@@ -7,9 +7,6 @@
 #include "TelemetryParser.h"
 #include "TelemetryReading.h"
 
-// ---------------------------------------------------------------------------
-// TelemetryParser
-// ---------------------------------------------------------------------------
 
 TEST(TelemetryParser, ParsesWellFormedLine) {
     TelemetryParser parser;
@@ -27,7 +24,6 @@ TEST(TelemetryParser, ParsesWellFormedLine) {
 }
 
 TEST(TelemetryParser, HandlesValuesEncodedAsStrings) {
-    // The ISS API sometimes returns numbers wrapped in quotes.
     TelemetryParser parser;
     const std::string line =
         R"({"timestamp":"1700000000","latitude":"-12.5","longitude":"100.25",)"
@@ -41,7 +37,6 @@ TEST(TelemetryParser, HandlesValuesEncodedAsStrings) {
 
 TEST(TelemetryParser, RejectsMissingField) {
     TelemetryParser parser;
-    // No "velocity" key.
     const std::string line =
         R"({"timestamp":1700000000,"latitude":40.0,"longitude":-74.0,)"
         R"("altitude":408.0})";
@@ -55,9 +50,6 @@ TEST(TelemetryParser, RejectsGarbageInput) {
     EXPECT_FALSE(parser.parse("").has_value());
 }
 
-// ---------------------------------------------------------------------------
-// MetricsEngine
-// ---------------------------------------------------------------------------
 
 TEST(MetricsEngine, GroundTrackZeroForSamePoint) {
     MetricsEngine engine;
@@ -68,7 +60,6 @@ TEST(MetricsEngine, GroundTrackZeroForSamePoint) {
 }
 
 TEST(MetricsEngine, GroundTrackKnownDistance) {
-    // London (51.5074, -0.1278) to Paris (48.8566, 2.3522) is ~343 km.
     MetricsEngine engine;
     TelemetryReading london;
     london.latitude = 51.5074;
@@ -78,7 +69,7 @@ TEST(MetricsEngine, GroundTrackKnownDistance) {
     paris.longitude = 2.3522;
 
     const double d = engine.groundTrackDistance(london, paris);
-    EXPECT_NEAR(d, 343.0, 5.0);  // within 5 km of the accepted value
+    EXPECT_NEAR(d, 343.0, 5.0);  
 }
 
 TEST(MetricsEngine, GroundTrackIsSymmetric) {
@@ -107,9 +98,6 @@ TEST(MetricsEngine, ComputesVelocityDeltaAndElapsed) {
     EXPECT_NEAR(m.seconds_elapsed, 5.0, 1e-9);
 }
 
-// ---------------------------------------------------------------------------
-// AnomalyDetector
-// ---------------------------------------------------------------------------
 
 TEST(AnomalyDetector, NominalReadingHasNoAnomalies) {
     AnomalyDetector detector;
