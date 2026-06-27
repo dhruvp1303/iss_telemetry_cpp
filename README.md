@@ -8,7 +8,7 @@ GoogleTest.
 
 The program reads one telemetry sample per line, so it processes each message in
 bounded work before moving to the next — it can sit at the end of a live feed
-(stdin) or replay a recorded one (a file).
+(stdin) or replay a recorded one (a file).h
 
 ## Architecture
 
