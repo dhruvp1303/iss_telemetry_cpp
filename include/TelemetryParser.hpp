@@ -4,7 +4,7 @@
 #include <optional>
 #include <string>
 
-#include "TelemetryReading.h"
+#include "TelemetryReading.hpp"
 
 // Parses one line of ISS telemetry JSON into a TelemetryReading.
 //

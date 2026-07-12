@@ -4,10 +4,10 @@
 #include <optional>
 #include <string>
 
-#include "AnomalyDetector.h"
-#include "MetricsEngine.h"
-#include "TelemetryParser.h"
-#include "TelemetryReading.h"
+#include "AnomalyDetector.hpp"
+#include "MetricsEngine.hpp"
+#include "TelemetryParser.hpp"
+#include "TelemetryReading.hpp"
 
 namespace {
 

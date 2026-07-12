@@ -4,8 +4,8 @@
 #include <string>
 #include <vector>
 
-#include "MetricsEngine.h"
-#include "TelemetryReading.h"
+#include "MetricsEngine.hpp"
+#include "TelemetryReading.hpp"
 
 // Configurable thresholds defining the expected operating envelope.
 // Defaults bracket the real ISS: it orbits at ~400-420 km and moves at

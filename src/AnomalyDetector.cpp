@@ -1,4 +1,4 @@
-#include "AnomalyDetector.h"
+#include "AnomalyDetector.hpp"
 
 #include <cmath>
 

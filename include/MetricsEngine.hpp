@@ -1,7 +1,7 @@
 #ifndef METRICS_ENGINE_H
 #define METRICS_ENGINE_H
 
-#include "TelemetryReading.h"
+#include "TelemetryReading.hpp"
 
 // Derived metrics computed from a pair of consecutive readings.
 struct Metrics {
