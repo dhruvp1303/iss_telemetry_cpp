@@ -2,10 +2,10 @@
 
 #include <cmath>
 
-#include "AnomalyDetector.h"
-#include "MetricsEngine.h"
-#include "TelemetryParser.h"
-#include "TelemetryReading.h"
+#include "AnomalyDetector.hpp"
+#include "MetricsEngine.hpp"
+#include "TelemetryParser.hpp"
+#include "TelemetryReading.hpp"
 
 
 TEST(TelemetryParser, ParsesWellFormedLine) {
